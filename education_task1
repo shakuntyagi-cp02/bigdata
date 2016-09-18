@@ -1,0 +1,8 @@
+Task -1 Find Out No. Of Employed & Unemployed on the basis of Education
+
+a = load '/user/hive/warehouse/census/000000_0' using PigStorage(',') as (age:chararray,education:chararray,ms:chararray,gender:chararray);
+b = foreach a generate education,gender;
+c = group b by (education,gender);
+d = foreach c generate group.education,group.gender,COUNT(b.gender);
+dump d;
+
